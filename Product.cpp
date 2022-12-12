@@ -4,8 +4,11 @@
 
 #include "Product.h"
 
-Product::Product(const std::string &name0, unsigned int price0) : name(name0), category("Uncategorized"), price(price0) {}
+Product::Product(const std::string &name0, unsigned int price0) : category("Uncategorized"), price(price0) {
+    this->name = name0;
+}
 
-Product::Product(const std::string &name0, unsigned int price0, const std::string &category0) : name(name0),
-                                                                                         category(category0),
-                                                                                         price(price0) {}
+Product::Product(const std::string &name0, unsigned int price0, const std::string &category0) : price(price0) {
+    this->name = name0;
+    this->category = category0;
+}
