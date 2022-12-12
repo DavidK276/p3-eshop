@@ -49,16 +49,18 @@ bool Inventory::insertProduct(Product &product) {
 
 std::vector<Product> Inventory::filterByPrice(unsigned int price) const {
     std::vector<Product> result;
-    for (const auto &product: this->products) {
-        if (product.getPrice() == price) {
-            result.push_back(product);
+    auto p = this->filterByPriceRange(price, price);
+    for (auto iter = p.first; iter != p.second; iter++) {
+        if (iter->getPrice() == price) {
+            result.push_back(*iter.base());
         }
     }
 
     return result;
 }
 
-auto Inventory::filterByPriceRange(unsigned int minPrice, unsigned int maxPrice) const {
+std::pair<std::vector<Product>::const_iterator, std::vector<Product>::const_iterator>
+Inventory::filterByPriceRange(unsigned int minPrice, unsigned int maxPrice) const {
     auto first = this->products.begin();
     auto last = this->products.end();
     auto len = std::distance(first, last);
@@ -90,6 +92,5 @@ auto Inventory::filterByPriceRange(unsigned int minPrice, unsigned int maxPrice)
         }
     }
     auto maxProduct = first;
-    std::pair res(minProduct, maxProduct);
-    return res;
+    return {minProduct, maxProduct};
 }

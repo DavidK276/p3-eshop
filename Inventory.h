@@ -28,7 +28,7 @@ public:
 
     std::vector<Product> filterByPrice(unsigned int price) const;
 
-    auto filterByPriceRange(unsigned int minPrice, unsigned int maxPrice) const;
+    std::pair<std::vector<Product>::const_iterator , std::vector<Product>::const_iterator> filterByPriceRange(unsigned int minPrice, unsigned int maxPrice) const;
 
 };
 
