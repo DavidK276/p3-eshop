@@ -30,6 +30,7 @@ public:
 
     MyRange<Product> filterByPriceRange(const Product::Price &minPrice, const Product::Price &maxPrice) const;
 
+    std::vector<Product> filterByCategory(const std::string &category) const;
 };
 
 

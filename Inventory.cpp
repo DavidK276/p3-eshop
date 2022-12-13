@@ -84,3 +84,12 @@ MyRange<Product> Inventory::filterByPriceRange(const Product::Price &minPrice, c
     auto maxProduct = first;
     return {minProduct, maxProduct};
 }
+
+std::vector<Product> Inventory::filterByCategory(const std::string &category) const {
+    std::vector<Product> result;
+    auto hasCategory = [&category](const Product &product) {
+        return product.getCategory() == category;
+    };
+    std::copy_if(this->products.begin(), this->products.end(), result.begin(), hasCategory);
+    return result;
+}
