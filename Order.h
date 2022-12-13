@@ -33,9 +33,9 @@ public:
 
     void setAddress(const std::string &address0) { this->address = address0; }
 
-    void replaceItems(const Inventory *inventory);
+    void replaceItems(const Inventory &inventory);
 
-    void shipOrder(const Inventory *inventory);
+    void shipOrder(const Inventory &inventory);
 };
 
 
