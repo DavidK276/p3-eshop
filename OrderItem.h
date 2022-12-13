@@ -17,6 +17,8 @@ public:
     unsigned int getQuantity() const { return this->quantity; }
 
     const Product *getProduct() const;
+
+    void setProduct(const Product &product0) {this->product = product0;};
 };
 
 

@@ -6,13 +6,14 @@
 #define ESHOP_ORDER_H
 
 #include "OrderItem.h"
+#include <list>
 
 enum class OrderStatus {
     PROCESSING, SHIPPED
 };
 
 class Order {
-    std::vector<OrderItem> items;
+    std::list<OrderItem> items;
     OrderStatus status;
     std::string address;
 public:
@@ -29,6 +30,8 @@ public:
     std::string getAddress() const { return this->address; }
 
     void setAddress(const std::string &address0) { this->address = address0; }
+
+    void replaceItems(const Inventory *inventory);
 };
 
 

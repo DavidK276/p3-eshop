@@ -35,6 +35,12 @@ public:
     Price getPrice() const { return this->price; }
 
     void setPrice(Price &price0) { this->price = price0; }
+
+    unsigned int getStock() const { return this->stock; }
+
+    void setStock(unsigned int stock0) { this->stock = stock0; }
+
+    bool inStock() const { return this->stock > 0; }
 };
 
 
