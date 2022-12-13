@@ -24,6 +24,8 @@ public:
 
     Product(const std::string &name0, const Price &price0, const std::string &category0);
 
+    ~Product() = default;
+
     std::string getName() const { return this->name; }
 
     void setName(std::string &name0) { this->name = name0; }

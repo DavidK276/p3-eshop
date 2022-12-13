@@ -16,6 +16,8 @@ class Inventory {
 public:
     Inventory() = default;
 
+    ~Inventory() = default;
+
     size_t productCount() const;
 
     void loadFromFile(std::string &filePath);

@@ -14,6 +14,8 @@ class OrderItem {
 public:
     OrderItem(const Product &product0, unsigned int quantity0);
 
+    ~OrderItem() = default;
+
     unsigned int getQuantity() const { return this->quantity; }
 
     const Product *getProduct() const;

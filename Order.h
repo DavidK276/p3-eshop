@@ -19,6 +19,8 @@ class Order {
 public:
     Order();
 
+    ~Order() = default;
+
     const OrderItem *getItem(size_t index) const;
 
     void addItem(const OrderItem &item);
