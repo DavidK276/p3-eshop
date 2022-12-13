@@ -46,11 +46,11 @@ bool Inventory::insertProduct(Product &product) {
     return true;
 }
 
-MyRange<Product> Inventory::filterByPrice(unsigned int price) const {
+MyRange<Product> Inventory::filterByPrice(const Product::Price &price) const {
     return this->filterByPriceRange(price, price);
 }
 
-MyRange<Product> Inventory::filterByPriceRange(unsigned int minPrice, unsigned int maxPrice) const {
+MyRange<Product> Inventory::filterByPriceRange(const Product::Price &minPrice, const Product::Price &maxPrice) const {
     auto first = this->products.begin();
     auto last = this->products.end();
     auto len = std::distance(first, last);

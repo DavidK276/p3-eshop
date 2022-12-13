@@ -26,9 +26,9 @@ public:
     // TODO: define proper return type
     bool insertProduct(Product &product);
 
-    MyRange<Product> filterByPrice(unsigned int price) const;
+    MyRange<Product> filterByPrice(const Product::Price &price) const;
 
-    MyRange<Product> filterByPriceRange(unsigned int minPrice, unsigned int maxPrice) const;
+    MyRange<Product> filterByPriceRange(const Product::Price &minPrice, const Product::Price &maxPrice) const;
 
 };
 

@@ -15,17 +15,17 @@ TEST(TestInventory, EmptyInventory) {
 
 TEST(TestInventory, OneProduct) {
     Inventory i;
-    Product p1("iPhone 13", 119999);
+    Product p1("iPhone 13", 1199.99);
     i.insertProduct(p1);
     ASSERT_EQ(1, i.productCount());
 }
 
 TEST(TestInventory, MultipleProducts) {
     Inventory i;
-    Product p1("iPhone 13", 119999);
-    Product p2("iPhone SE", 79999);
-    Product p3("Logitech MX Master", 9890);
-    Product p4("Modre pero", 89);
+    Product p1("iPhone 13", 1199.99);
+    Product p2("iPhone SE", 799.99);
+    Product p3("Logitech MX Master", 98.9);
+    Product p4("Modre pero", 0.89);
     i.insertProduct(p1);
     i.insertProduct(p2);
     i.insertProduct(p3);
@@ -39,15 +39,15 @@ TEST(TestInventory, MultipleProducts) {
 
 TEST(TestInventory, ProductPriceRange) {
     Inventory i;
-    Product p1("iPhone 13", 119999);
-    Product p2("iPhone SE", 79999);
-    Product p3("Logitech MX Master", 9890);
-    Product p4("Modre pero", 89);
+    Product p1("iPhone 13", 1199.99);
+    Product p2("iPhone SE", 799.99);
+    Product p3("Logitech MX Master", 98.9);
+    Product p4("Modre pero", 0.89);
     i.insertProduct(p1);
     i.insertProduct(p2);
     i.insertProduct(p3);
     i.insertProduct(p4);
-    MyRange<Product> x = i.filterByPriceRange(9000, 80000);
+    MyRange<Product> x = i.filterByPriceRange(90, 800);
     ASSERT_EQ(2, x.getCount());
     ASSERT_EQ("Logitech MX Master", x.getFirst()->getName());
     ASSERT_EQ("iPhone SE", x.getFinal()->getName());
@@ -55,18 +55,18 @@ TEST(TestInventory, ProductPriceRange) {
 
 TEST(TestInventory, ProductPrice) {
     Inventory i;
-    Product p1("iPhone 13", 119999);
-    Product p2("iPhone SE", 79999);
-    Product p3("Logitech MX Master 2S", 9890);
-    Product p4("Modre pero", 89);
-    Product p5("Logitech MX Master 3S", 9890);
+    Product p1("iPhone 13", 1199.99);
+    Product p2("iPhone SE", 799.99);
+    Product p3("Logitech MX Master 2S", 98.9);
+    Product p4("Modre pero", 0.89);
+    Product p5("Logitech MX Master 3S", 98.9);
     i.insertProduct(p1);
     i.insertProduct(p2);
     i.insertProduct(p3);
     i.insertProduct(p4);
     i.insertProduct(p5);
-    MyRange<Product> products = i.filterByPrice(9890);
+    MyRange<Product> products = i.filterByPrice(98.9);
     ASSERT_EQ(2, products.getCount());
-    products = i.filterByPrice(9889);
+    products = i.filterByPrice(98.89);
     ASSERT_EQ(0, products.getCount());
 }

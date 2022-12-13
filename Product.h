@@ -6,16 +6,20 @@
 #define ESHOP_PRODUCT_H
 
 #include <iostream>
+#include <boost/multiprecision/cpp_dec_float.hpp>
 
 
 class Product {
+public:
+    typedef boost::multiprecision::number<boost::multiprecision::cpp_dec_float<16>> Price;
+private:
     std::string name;
     std::string category;
-    unsigned int price;
+    Price price;
 public:
-    Product(const std::string &name0, unsigned int price0);
+    Product(const std::string &name0, const Price &price0);
 
-    Product(const std::string &name0, unsigned int price0, const std::string &category0);
+    Product(const std::string &name0, const Price &price0, const std::string &category0);
 
     std::string getName() const { return this->name; }
 
@@ -25,12 +29,9 @@ public:
 
     void setCategory(std::string &category0) { this->category = category0; }
 
-    unsigned int getPrice() const { return this->price; }
+    Price getPrice() const { return this->price; }
 
-    float getPriceFloat() const { return static_cast<float>(this->price) / 100; }
-
-    void setPrice(unsigned int price0) { this->price = price0; }
-
+    void setPrice(Price &price0) { this->price = price0; }
 };
 
 
