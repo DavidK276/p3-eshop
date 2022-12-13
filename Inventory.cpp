@@ -9,12 +9,10 @@ size_t Inventory::productCount() const {
     return this->products.size();
 }
 
-const Product *Inventory::getProduct(const std::string &name) const {
-    auto iter = this->products.end();
-    while (iter != this->products.end()) {
-        if (iter->getName() == name) {
-            return iter.base();
-        }
+Product *Inventory::getProduct(const std::string &name) const {
+    auto product = this->productMap.find(name);
+    if (this->productMap.find(name) != this->productMap.end()) {
+        return product->second;
     }
     return nullptr;
 }
@@ -43,6 +41,7 @@ bool Inventory::insertProduct(Product &product) {
         }
     }
     this->products.insert(first, product);
+    this->productMap.insert(std::pair<std::string, Product*>(product.getName(), &product));
     return true;
 }
 

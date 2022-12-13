@@ -7,9 +7,12 @@
 
 #include "Product.h"
 #include "MyRange.h"
+#include <map>
+#include <memory>
 
 class Inventory {
     std::vector<Product> products;
+    std::map<std::string, Product*> productMap;
 public:
     Inventory() = default;
 
@@ -19,7 +22,7 @@ public:
 
     void saveToFile(std::string &filePath) const;
 
-    const Product *getProduct(const std::string &name) const;
+    Product *getProduct(const std::string &name) const;
 
     const Product *getProduct(size_t index) const;
 

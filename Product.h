@@ -38,7 +38,7 @@ public:
 
     unsigned int getStock() const { return this->stock; }
 
-    void setStock(unsigned int stock0) { this->stock = stock0; }
+    void ship(unsigned int quantity) { this->stock -= quantity; }
 
     bool inStock() const { return this->stock > 0; }
 };

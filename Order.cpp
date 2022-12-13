@@ -45,3 +45,10 @@ void Order::replaceItems(const Inventory *inventory) {
         }
     }
 }
+
+void Order::shipOrder(const Inventory *inventory) {
+    for (const auto &item: this->items) {
+        inventory->getProduct(item.getProduct()->getName())->ship(item.getQuantity());
+    }
+    this->status = OrderStatus::SHIPPED;
+}
