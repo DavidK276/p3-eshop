@@ -7,7 +7,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
         Product.cpp
-        Inventory.cpp)
+        Inventory.cpp
+        OrderItem.cpp
+        Order.cpp)
 
 set(TEST_FILES
         testy1.cpp

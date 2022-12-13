@@ -16,7 +16,10 @@ private:
     std::string name;
     std::string category;
     Price price;
+    unsigned int stock;
 public:
+    Product(const Product &product0) = default;
+
     Product(const std::string &name0, const Price &price0);
 
     Product(const std::string &name0, const Price &price0, const std::string &category0);
