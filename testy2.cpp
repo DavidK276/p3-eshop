@@ -47,11 +47,10 @@ TEST(TestInventory, ProductPriceRange) {
     i.insertProduct(p2);
     i.insertProduct(p3);
     i.insertProduct(p4);
-    auto x = i.filterByPriceRange(9000, 80000);
-    ASSERT_EQ(2, std::distance(x.first, x.second));
-    ASSERT_EQ("Logitech MX Master", x.first->getName());
-    x.second -= 1;
-    ASSERT_EQ("iPhone SE", x.second->getName());
+    MyRange<Product> x = i.filterByPriceRange(9000, 80000);
+    ASSERT_EQ(2, x.getCount());
+    ASSERT_EQ("Logitech MX Master", x.getFirst()->getName());
+    ASSERT_EQ("iPhone SE", x.getFinal()->getName());
 }
 
 TEST(TestInventory, ProductPrice) {
@@ -66,8 +65,8 @@ TEST(TestInventory, ProductPrice) {
     i.insertProduct(p3);
     i.insertProduct(p4);
     i.insertProduct(p5);
-    auto products = i.filterByPrice(9890);
-    ASSERT_EQ(2, products.size());
+    MyRange<Product> products = i.filterByPrice(9890);
+    ASSERT_EQ(2, products.getCount());
     products = i.filterByPrice(9889);
-    ASSERT_EQ(0, products.size());
+    ASSERT_EQ(0, products.getCount());
 }

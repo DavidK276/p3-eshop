@@ -4,7 +4,6 @@
 
 #include "Inventory.h"
 #include <algorithm>
-#include <iterator>
 
 size_t Inventory::productCount() const {
     return this->products.size();
@@ -47,20 +46,11 @@ bool Inventory::insertProduct(Product &product) {
     return true;
 }
 
-std::vector<Product> Inventory::filterByPrice(unsigned int price) const {
-    std::vector<Product> result;
-    auto p = this->filterByPriceRange(price, price);
-    for (auto iter = p.first; iter != p.second; iter++) {
-        if (iter->getPrice() == price) {
-            result.push_back(*iter.base());
-        }
-    }
-
-    return result;
+MyRange<Product> Inventory::filterByPrice(unsigned int price) const {
+    return this->filterByPriceRange(price, price);
 }
 
-std::pair<std::vector<Product>::const_iterator, std::vector<Product>::const_iterator>
-Inventory::filterByPriceRange(unsigned int minPrice, unsigned int maxPrice) const {
+MyRange<Product> Inventory::filterByPriceRange(unsigned int minPrice, unsigned int maxPrice) const {
     auto first = this->products.begin();
     auto last = this->products.end();
     auto len = std::distance(first, last);

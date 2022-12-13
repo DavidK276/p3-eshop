@@ -6,7 +6,7 @@
 #define ESHOP_INVENTORY_H
 
 #include "Product.h"
-#include <vector>
+#include "MyRange.h"
 
 class Inventory {
     std::vector<Product> products;
@@ -21,14 +21,14 @@ public:
 
     const Product *getProduct(const std::string &name) const;
 
-    const Product *getProduct(const size_t index) const;
+    const Product *getProduct(size_t index) const;
 
     // TODO: define proper return type
     bool insertProduct(Product &product);
 
-    std::vector<Product> filterByPrice(unsigned int price) const;
+    MyRange<Product> filterByPrice(unsigned int price) const;
 
-    std::pair<std::vector<Product>::const_iterator , std::vector<Product>::const_iterator> filterByPriceRange(unsigned int minPrice, unsigned int maxPrice) const;
+    MyRange<Product> filterByPriceRange(unsigned int minPrice, unsigned int maxPrice) const;
 
 };
 
