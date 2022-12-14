@@ -92,3 +92,7 @@ std::vector<Product> Inventory::filterByCategory(const std::string &category) co
     std::copy_if(this->products.begin(), this->products.end(), result.begin(), hasCategory);
     return result;
 }
+
+Product *Inventory::operator[](const std::string &name) const {
+    return this->getProduct(name);
+}
