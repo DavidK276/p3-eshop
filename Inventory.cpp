@@ -92,7 +92,7 @@ MyRange<Product> Inventory::filterByPriceRange(const Product::Price &minPrice, c
 }
 
 std::vector<Product> Inventory::filterByCategory(const std::string &category) const {
-    std::vector<Product> result;
+    std::vector<Product> result(this->products.size());
     auto hasCategory = [&category](const Product &product) {
         return product.getCategory() == category;
     };
