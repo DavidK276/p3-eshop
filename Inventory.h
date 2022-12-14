@@ -9,6 +9,7 @@
 #include "MyRange.h"
 #include <map>
 #include <memory>
+#include <stdarg.h>
 
 class Inventory {
     std::vector<Product> products;
@@ -27,6 +28,8 @@ public:
     Product *getProduct(const std::string &name) const;
 
     const Product *getProduct(size_t index) const;
+
+    MyRange<Product> getAllProducts() const;
 
     // TODO: define proper return type
     bool insertProduct(Product &product);

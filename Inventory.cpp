@@ -18,7 +18,14 @@ Product *Inventory::getProduct(const std::string &name) const {
 }
 
 const Product *Inventory::getProduct(const size_t index) const {
-    return &this->products.at(index);
+    if (index >= this->products.size()) {
+        return nullptr;
+    }
+    return &this->products[index];
+}
+
+MyRange<Product> Inventory::getAllProducts() const {
+    return {this->products.begin(), this->products.end()};
 }
 
 bool Inventory::insertProduct(Product &product) {
