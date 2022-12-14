@@ -8,6 +8,7 @@
 #include <iostream>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
+#define NO_CATEGORY "Uncategorized"
 
 class Product {
 public:
@@ -20,9 +21,11 @@ private:
 public:
     Product(const Product &product0) = default;
 
+    Product(Product &&product0);
+
     Product(const std::string &name0, const Price &price0);
 
-    Product(const std::string &name0, const Price &price0, const std::string &category0);
+    Product(const std::string &name0, const std::string &category0, const Price &price0, unsigned int stock0 = 0);
 
     ~Product() = default;
 
@@ -42,7 +45,13 @@ public:
 
     void ship(unsigned int quantity) { this->stock -= quantity; }
 
+    void stockUp(unsigned int quantity) { this->stock += quantity; }
+
     bool inStock() const { return this->stock > 0; }
+
+    Product &operator=(const Product &product0) = default;
+
+    bool operator==(const Product &product0) const;
 };
 
 
