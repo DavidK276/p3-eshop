@@ -20,6 +20,8 @@ public:
 
     const Product *getProduct() const;
 
+    std::string getProductName() const;
+
     void setProduct(const Product &product0) {this->product = product0;};
 };
 

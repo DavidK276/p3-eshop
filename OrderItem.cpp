@@ -9,3 +9,7 @@ OrderItem::OrderItem(const Product &product0, const unsigned int quantity0) : pr
 const Product *OrderItem::getProduct() const {
     return &this->product;
 }
+
+std::string OrderItem::getProductName() const {
+    return this->product.getName();
+}
