@@ -9,7 +9,6 @@
 #include "MyRange.h"
 #include <map>
 #include <memory>
-#include <stdarg.h>
 
 class Inventory {
     std::vector<Product> products;
