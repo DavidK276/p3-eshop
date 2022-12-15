@@ -12,7 +12,7 @@
 
 class Inventory {
     std::vector<Product> products;
-    std::map<std::string, Product*> productMap;
+    std::map<std::string, Product*> productNameMap;
 public:
     Inventory() = default;
 

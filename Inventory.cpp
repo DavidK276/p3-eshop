@@ -10,11 +10,11 @@ size_t Inventory::productCount() const {
 }
 
 Product *Inventory::getProduct(const std::string &name) const {
-    auto product = this->productMap.find(name);
-    if (this->productMap.find(name) != this->productMap.end()) {
-        return product->second;
+    auto product = (*this)[name];
+    if (product == nullptr) {
+        throw std::invalid_argument("Key not found");
     }
-    return nullptr;
+    return product;
 }
 
 const Product *Inventory::getProduct(const size_t index) const {
@@ -29,7 +29,7 @@ MyRange<Product> Inventory::getAllProducts() const {
 }
 
 bool Inventory::insertProduct(Product &product) {
-    auto p = this->getProduct(product.getName());
+    auto p = (*this)[product.getName()];
     if (p != nullptr) {
         return false;
     }
@@ -48,7 +48,7 @@ bool Inventory::insertProduct(Product &product) {
         }
     }
     this->products.insert(first, product);
-    this->productMap.insert(std::pair<std::string, Product*>(product.getName(), &product));
+    this->productNameMap.insert(std::pair<std::string, Product*>(product.getName(), &product));
     return true;
 }
 
@@ -97,9 +97,14 @@ std::vector<Product> Inventory::filterByCategory(const std::string &category) co
         return product.getCategory() == category;
     };
     std::copy_if(this->products.begin(), this->products.end(), result.begin(), hasCategory);
+    result.shrink_to_fit();
     return result;
 }
 
 Product *Inventory::operator[](const std::string &name) const {
-    return this->getProduct(name);
+    auto product = this->productNameMap.find(name);
+    if (this->productNameMap.find(name) != this->productNameMap.end()) {
+        return product->second;
+    }
+    return nullptr;
 }

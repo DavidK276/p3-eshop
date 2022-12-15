@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <boost/multiprecision/cpp_dec_float.hpp>
+#include <stdexcept>
 
 #define NO_CATEGORY "Uncategorized"
 
