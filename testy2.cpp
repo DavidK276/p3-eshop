@@ -21,6 +21,8 @@ TEST(TestInventory, OneProduct) {
     i.insertProduct(p1);
     ASSERT_EQ(1, i.productCount());
     ASSERT_EQ(1199.99, i.getProduct("iPhone 13")->getPrice());
+    p1.setPrice(10);
+    ASSERT_EQ(1199.99, i.getProduct("iPhone 13")->getPrice());
     ASSERT_FALSE(i.getProduct("iPhone 13")->inStock());
 }
 
