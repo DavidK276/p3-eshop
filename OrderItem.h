@@ -9,10 +9,10 @@
 
 
 class OrderItem {
-    Product product;
+    Product *product;
     unsigned int quantity;
 public:
-    OrderItem(const Product &product0, unsigned int quantity0);
+    OrderItem(Product *product0, unsigned int quantity0);
 
     ~OrderItem() = default;
 
@@ -22,7 +22,7 @@ public:
 
     std::string getProductName() const;
 
-    void setProduct(const Product &product0) {this->product = product0;};
+    void setProduct(Product *product0) {this->product = product0;};
 };
 
 

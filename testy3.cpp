@@ -20,7 +20,7 @@ TEST(TestOrderitem, CreateItem) {
     inv.insertProduct(p3);
     inv.insertProduct(p4);
     inv.insertProduct(p5);
-    OrderItem item(*inv["iPhone 13"], 1);
+    OrderItem item(inv["iPhone 13"], 1);
     ASSERT_EQ(*inv["iPhone 13"], *item.getProduct());
 }
 
@@ -36,8 +36,8 @@ TEST(TestOrderItem, SetProduct) {
     inv.insertProduct(p3);
     inv.insertProduct(p4);
     inv.insertProduct(p5);
-    OrderItem item(*inv["iPhone 13"], 1);
-    item.setProduct(*inv["iPhone SE"]);
+    OrderItem item(inv["iPhone 13"], 1);
+    item.setProduct(inv["iPhone SE"]);
     ASSERT_EQ("iPhone SE", item.getProductName());
 }
 
@@ -53,6 +53,6 @@ TEST(TestOrderItem, ItemQuantity) {
     inv.insertProduct(p3);
     inv.insertProduct(p4);
     inv.insertProduct(p5);
-    OrderItem item(*inv["iPhone 13"], 1);
+    OrderItem item(inv["iPhone 13"], 1);
     ASSERT_EQ(1, item.getQuantity());
 }

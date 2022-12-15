@@ -33,10 +33,10 @@ void Order::replaceItems(const Inventory &inventory) {
         if (!iter->getProduct()->inStock()) {
             auto potentialProducts = inventory.filterByCategory(iter->getProduct()->getCategory());
             bool foundSuitable = false;
-            for (const auto &product: boost::adaptors::reverse(potentialProducts)) {
+            for (auto &product: boost::adaptors::reverse(potentialProducts)) {
                 if (product.getStock() >= iter->getQuantity()) {
                     foundSuitable = true;
-                    iter->setProduct(product);
+                    iter->setProduct(&product);
                     break;
                 }
             }

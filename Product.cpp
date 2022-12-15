@@ -21,13 +21,7 @@ Product::Product(const std::string &name0, const std::string &category0, const P
     this->price = price0;
 }
 
-Product &Product::operator=(const Product &product0) {
-    this->name = product0.name;
-    this->category = product0.category;
-    this->price = product0.price;
-    this->stock = product0.stock;
-    return *this;
-}
+Product &Product::operator=(const Product &product0) = default;
 
 bool Product::operator==(const Product &product0) const {
     return product0.name == this->name && product0.category == this->category && product0.price == this->price &&

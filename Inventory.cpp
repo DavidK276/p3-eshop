@@ -28,7 +28,7 @@ MyRange<Product> Inventory::getAllProducts() const {
     return {this->products.begin(), this->products.end()};
 }
 
-void Inventory::insertProduct(Product &product) {
+void Inventory::insertProduct(Product product) {
     auto p = (*this)[product.getName()];
     if (p != nullptr) {
         throw std::invalid_argument("Product already exists");

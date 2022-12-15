@@ -30,7 +30,7 @@ public:
 
     MyRange<Product> getAllProducts() const;
 
-    void insertProduct(Product &product);
+    void insertProduct(Product product);
 
     void updateProduct(Product &product) const;
 
