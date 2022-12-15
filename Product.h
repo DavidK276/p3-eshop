@@ -42,7 +42,7 @@ public:
 
     Price getPrice() const { return this->price; }
 
-    void setPrice(Price &price0) { this->price = price0; }
+    void setPrice(const Price &price0) { this->price = price0; }
 
     unsigned int getStock() const { return this->stock; }
 
@@ -52,7 +52,7 @@ public:
 
     bool inStock() const { return this->stock > 0; }
 
-    Product &operator=(const Product &product0) = default;
+    Product &operator=(const Product &product0);
 
     bool operator==(const Product &product0) const;
 };

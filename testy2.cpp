@@ -24,6 +24,24 @@ TEST(TestInventory, OneProduct) {
     ASSERT_FALSE(i.getProduct("iPhone 13")->inStock());
 }
 
+TEST(TestInventory, UpdateProduct) {
+    Inventory i;
+    Product p1("iPhone 13", "Phones", 1199.99);
+    Product p2("iPhone 13", "Mobiles", 10);
+    i.insertProduct(p1);
+    try {
+        i.insertProduct(p2);
+        ASSERT_FALSE(true);
+    }
+    catch (std::invalid_argument &) {
+        ASSERT_EQ(1199.99, i["iPhone 13"]->getPrice());
+    }
+    i.updateProduct(p2);
+    ASSERT_EQ(10, i["iPhone 13"]->getPrice());
+    i.upsertProduct(p1);
+    ASSERT_EQ(1199.99, i["iPhone 13"]->getPrice());
+}
+
 TEST(TestInventory, MultipleProducts) {
     Inventory i;
     Product p1("iPhone 13", 1199.99);
@@ -100,7 +118,7 @@ TEST(TestInventory, ProductCategory) {
     Product p4("Modre pero", 0.89);
     Product p5("Cierne pero", 0.89);
     auto filteredProducts = inv.filterByCategory("Mobiles");
-    for (const auto& product: filteredProducts) {
+    for (const auto &product: filteredProducts) {
         ASSERT_EQ("Mobiles", product.getCategory());
     }
 }

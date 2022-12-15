@@ -12,7 +12,7 @@
 
 class Inventory {
     std::vector<Product> products;
-    std::map<std::string, Product*> productNameMap;
+    std::map<std::string, Product *> productNameMap;
 public:
     Inventory() = default;
 
@@ -30,8 +30,11 @@ public:
 
     MyRange<Product> getAllProducts() const;
 
-    // TODO: define proper return type
-    bool insertProduct(Product &product);
+    void insertProduct(Product &product);
+
+    void updateProduct(Product &product) const;
+
+    void upsertProduct(Product &product);
 
     MyRange<Product> filterByPrice(const Product::Price &price) const;
 

@@ -12,7 +12,7 @@ size_t Inventory::productCount() const {
 Product *Inventory::getProduct(const std::string &name) const {
     auto product = (*this)[name];
     if (product == nullptr) {
-        throw std::invalid_argument("Key not found");
+        throw std::invalid_argument("Product not found");
     }
     return product;
 }
@@ -28,10 +28,10 @@ MyRange<Product> Inventory::getAllProducts() const {
     return {this->products.begin(), this->products.end()};
 }
 
-bool Inventory::insertProduct(Product &product) {
+void Inventory::insertProduct(Product &product) {
     auto p = (*this)[product.getName()];
     if (p != nullptr) {
-        return false;
+        throw std::invalid_argument("Product already exists");
     }
     auto first = this->products.begin();
     auto last = this->products.end();
@@ -48,8 +48,24 @@ bool Inventory::insertProduct(Product &product) {
         }
     }
     this->products.insert(first, product);
-    this->productNameMap.insert(std::pair<std::string, Product*>(product.getName(), &product));
-    return true;
+    this->productNameMap.insert(std::pair<std::string, Product *>(product.getName(), &product));
+}
+
+void Inventory::updateProduct(Product &product) const {
+    auto p = (*this)[product.getName()];
+    if (p == nullptr) {
+        throw std::invalid_argument("Product not found");
+    }
+    *p = product;
+}
+
+void Inventory::upsertProduct(Product &product) {
+    try {
+        this->insertProduct(product);
+    }
+    catch (std::invalid_argument &) {
+        this->updateProduct(product);
+    }
 }
 
 MyRange<Product> Inventory::filterByPrice(const Product::Price &price) const {
