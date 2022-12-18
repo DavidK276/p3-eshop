@@ -23,7 +23,7 @@ public:
 
     const OrderItem *getItem(size_t index) const;
 
-    void addItem(const OrderItem &item);
+    void addItem(OrderItem item);
 
     OrderStatus getStatus() const { return this->status; }
 

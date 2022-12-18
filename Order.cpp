@@ -7,7 +7,11 @@
 
 Order::Order() : status(OrderStatus::PROCESSING) {}
 
-// expensive and only used for testing
+/*
+ * Retrieves the specified element from the list.
+ * This is expensive and is only intended for testing.
+ * Returns nullptr on failure.
+ */
 const OrderItem *Order::getItem(size_t index) const {
     if (this->items.size() <= index) {
         return nullptr;
@@ -23,11 +27,16 @@ const OrderItem *Order::getItem(size_t index) const {
     return nullptr;
 }
 
-void Order::addItem(const OrderItem &item) {
+/*
+ * Adds the item to the order.
+ */
+void Order::addItem(const OrderItem item) {
     this->items.push_back(item);
 }
 
-// replaces low stock items with item of same category and lowest price
+/*
+ * Replaces out of stock items with the item of the same category and highest price.
+ */
 void Order::replaceItems(const Inventory &inventory) {
     for (auto iter = this->items.begin(); iter != this->items.end(); iter++) {
         if (!iter->getProduct()->inStock()) {
@@ -47,6 +56,9 @@ void Order::replaceItems(const Inventory &inventory) {
     }
 }
 
+/*
+ * Replaces items, decreases stock of each item in the inventory and sets the order status to shipped.
+ */
 void Order::shipOrder(const Inventory &inventory) {
     this->replaceItems(inventory);
     for (const auto &item: this->items) {
