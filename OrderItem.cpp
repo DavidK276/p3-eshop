@@ -4,14 +4,18 @@
 
 #include "OrderItem.h"
 
-OrderItem::OrderItem(Product *product0, const unsigned int quantity0) : quantity(quantity0) {
-    this->product = product0;
-}
+OrderItem::OrderItem(Product *product0, const unsigned int quantity0) : product(product0), quantity(quantity0) {}
 
+/*
+ * Returns a pointer to the contained product.
+ */
 const Product *OrderItem::getProduct() const {
     return this->product;
 }
 
+/*
+ * Returns the name of the contained product.
+ */
 std::string OrderItem::getProductName() const {
     return this->product->getName();
 }

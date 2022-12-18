@@ -38,7 +38,7 @@ TEST(TestOrderItem, SetProduct) {
     inv.insertProduct(p5);
     OrderItem item(inv["iPhone 13"], 1);
     item.setProduct(inv["iPhone SE"]);
-    ASSERT_EQ("iPhone SE", item.getProductName());
+    ASSERT_EQ(*inv["iPhone SE"], *item.getProduct());
 }
 
 TEST(TestOrderItem, ItemQuantity) {
