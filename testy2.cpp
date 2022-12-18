@@ -11,8 +11,9 @@ using namespace ::testing;
 TEST(TestInventory, EmptyInventory) {
     Inventory i;
     ASSERT_EQ(0, i.productCount());
+    // get non existing product
     ASSERT_EQ(nullptr, i["iPhone 13"]);
-    ASSERT_EQ(nullptr, i.getProduct(1));
+    ASSERT_EQ(nullptr, i.getProduct(0));
 }
 
 TEST(TestInventory, OneProduct) {
@@ -21,9 +22,28 @@ TEST(TestInventory, OneProduct) {
     i.insertProduct(p1);
     ASSERT_EQ(1, i.productCount());
     ASSERT_EQ(1199.99, i.getProduct("iPhone 13")->getPrice());
-    p1.setPrice(10);
+    // check for unwanted reference to p1
+    Product p2(std::move(p1));
     ASSERT_EQ(1199.99, i.getProduct("iPhone 13")->getPrice());
+    ASSERT_EQ("Uncategorized", i.getProduct("iPhone 13")->getCategory());
     ASSERT_FALSE(i.getProduct("iPhone 13")->inStock());
+}
+
+TEST(TestInventory, DuplicateProduct) {
+    Inventory i;
+    Product p1("iPhone 13", 1199.99);
+    i.insertProduct(p1);
+    // check for unwanted reference to p1
+    p1.setPrice(10);
+    p1.setCategory("Mobiles");
+    try {
+        i.insertProduct(p1);
+        ASSERT_TRUE(false);
+    }
+    catch (std::invalid_argument &) {
+        ASSERT_EQ(1, i.productCount());
+        ASSERT_EQ(1199.99, i["iPhone 13"]->getPrice());
+    }
 }
 
 TEST(TestInventory, UpdateProduct) {
@@ -36,12 +56,14 @@ TEST(TestInventory, UpdateProduct) {
         ASSERT_FALSE(true);
     }
     catch (std::invalid_argument &) {
+        p1.setPrice(20);
         ASSERT_EQ(1199.99, i["iPhone 13"]->getPrice());
     }
     i.updateProduct(p2);
+    p2.setPrice(12);
     ASSERT_EQ(10, i["iPhone 13"]->getPrice());
     i.upsertProduct(p1);
-    ASSERT_EQ(1199.99, i["iPhone 13"]->getPrice());
+    ASSERT_EQ(20, i["iPhone 13"]->getPrice());
 }
 
 TEST(TestInventory, MultipleProducts) {
@@ -73,6 +95,7 @@ TEST(TestInventory, ProductSorting) {
     inv.insertProduct(p3);
     inv.insertProduct(p4);
     inv.insertProduct(p5);
+    // check if products are sorted by price ascending
     for (size_t i = 0; i < inv.productCount() - 1; i++) {
         ASSERT_TRUE(inv.getProduct(i)->getPrice() <= inv.getProduct(i)->getPrice());
     }
@@ -88,7 +111,7 @@ TEST(TestInventory, ProductPriceRange) {
     i.insertProduct(p2);
     i.insertProduct(p3);
     i.insertProduct(p4);
-    MyRange<Product> x = i.filterByPriceRange(90, 800);
+    MyRange<Product> x = i.filterByPriceRange(98.9, 799.99);
     ASSERT_EQ(2, x.getCount());
     ASSERT_EQ("Logitech MX Master", x.getFirst()->getName());
     ASSERT_EQ("iPhone SE", x.getFinal()->getName());

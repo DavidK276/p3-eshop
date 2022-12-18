@@ -5,10 +5,17 @@
 #include "Inventory.h"
 #include <algorithm>
 
+
+/*
+ * Count of all products in inventory.
+ */
 size_t Inventory::productCount() const {
     return this->products.size();
 }
 
+/*
+ * Get pointer to product by product name. Throws exception on failure.
+ */
 Product *Inventory::getProduct(const std::string &name) const {
     auto product = (*this)[name];
     if (product == nullptr) {
@@ -17,6 +24,9 @@ Product *Inventory::getProduct(const std::string &name) const {
     return product;
 }
 
+/*
+ * Get pointer to product by its index in the vector. Used for testing. Returns nullptr on invalid index.
+ */
 const Product *Inventory::getProduct(const size_t index) const {
     if (index >= this->products.size()) {
         return nullptr;
@@ -24,10 +34,17 @@ const Product *Inventory::getProduct(const size_t index) const {
     return &this->products[index];
 }
 
+/*
+ * Returns an iterator through all products.
+ */
 MyRange<Product> Inventory::getAllProducts() const {
     return {this->products.begin(), this->products.end()};
 }
 
+/*
+ * Inserts the product into the inventory.
+ * Uses binary search to find the appropriate position in the vector.
+ */
 void Inventory::insertProduct(Product product) {
     auto p = (*this)[product.getName()];
     if (p != nullptr) {
@@ -51,6 +68,9 @@ void Inventory::insertProduct(Product product) {
     this->productNameMap.insert(std::pair<std::string, Product *>(product.getName(), &product));
 }
 
+/*
+ * Updates the data of an existing product. Throws exception on failure.
+ */
 void Inventory::updateProduct(Product &product) const {
     auto p = (*this)[product.getName()];
     if (p == nullptr) {
@@ -59,6 +79,9 @@ void Inventory::updateProduct(Product &product) const {
     *p = product;
 }
 
+/*
+ * Updates the data of an existing product. Inserts the product if it does not exist.
+ */
 void Inventory::upsertProduct(Product &product) {
     try {
         this->insertProduct(product);
@@ -68,10 +91,17 @@ void Inventory::upsertProduct(Product &product) {
     }
 }
 
+/*
+ * Returns an iterator through all products with the specified price.
+ */
 MyRange<Product> Inventory::filterByPrice(const Product::Price &price) const {
     return this->filterByPriceRange(price, price);
 }
 
+/*
+ * Returns an iterator through all products with the specified price range, minPrice and maxPrice included.
+ * Uses binary search to find the positions.
+ */
 MyRange<Product> Inventory::filterByPriceRange(const Product::Price &minPrice, const Product::Price &maxPrice) const {
     auto first = this->products.begin();
     auto last = this->products.end();
@@ -107,6 +137,9 @@ MyRange<Product> Inventory::filterByPriceRange(const Product::Price &minPrice, c
     return {minProduct, maxProduct};
 }
 
+/*
+ * Return a vector of products with the specified category.
+ */
 std::vector<Product> Inventory::filterByCategory(const std::string &category) const {
     std::vector<Product> result(this->products.size());
     auto hasCategory = [&category](const Product &product) {
@@ -117,6 +150,9 @@ std::vector<Product> Inventory::filterByCategory(const std::string &category) co
     return result;
 }
 
+/*
+ * Get pointer to product by product name. Returns nullptr on failure.
+ */
 Product *Inventory::operator[](const std::string &name) const {
     auto product = this->productNameMap.find(name);
     if (this->productNameMap.find(name) != this->productNameMap.end()) {
