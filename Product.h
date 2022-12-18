@@ -38,7 +38,7 @@ public:
 
     std::string getCategory() const { return this->category; }
 
-    void setCategory(std::string &category0) { this->category = category0; }
+    void setCategory(const std::string &category0) { this->category = category0; }
 
     Price getPrice() const { return this->price; }
 
