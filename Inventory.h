@@ -32,6 +32,8 @@ public:
 
     void insertProduct(Product product);
 
+    void insertProducts(std::initializer_list<Product> productList);
+
     void updateProduct(Product &product) const;
 
     void upsertProduct(Product &product);

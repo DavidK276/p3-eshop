@@ -142,6 +142,11 @@ TEST(TestInventory, ProductCategory) {
     Product p3("Logitech MX Master", 98.9);
     Product p4("Modre pero", 0.89);
     Product p5("Cierne pero", 0.89);
+    inv.insertProduct(p1);
+    inv.insertProduct(p2);
+    inv.insertProduct(p3);
+    inv.insertProduct(p4);
+    inv.insertProduct(p5);
     auto filteredProducts = inv.filterByCategory("Mobiles");
     for (const auto &product: filteredProducts) {
         ASSERT_EQ("Mobiles", product.getCategory());

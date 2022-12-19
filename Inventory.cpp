@@ -65,7 +65,13 @@ void Inventory::insertProduct(Product product) {
         }
     }
     this->products.insert(first, product);
-    this->productNameMap.insert(std::pair<std::string, Product *>(product.getName(), &product));
+    this->productNameMap.insert({product.getName(), &product});
+}
+
+void Inventory::insertProducts(std::initializer_list<Product> productList) {
+    for (const auto& product : productList) {
+        this->insertProduct(product);
+    }
 }
 
 /*
@@ -145,8 +151,8 @@ std::vector<Product> Inventory::filterByCategory(const std::string &category) co
     auto hasCategory = [&category](const Product &product) {
         return product.getCategory() == category;
     };
-    std::copy_if(this->products.begin(), this->products.end(), result.begin(), hasCategory);
-    result.shrink_to_fit();
+    auto final = std::copy_if(this->products.begin(), this->products.end(), result.begin(), hasCategory);
+    result.erase(final, result.end());
     return result;
 }
 
