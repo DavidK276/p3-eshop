@@ -6,6 +6,12 @@
 #include <algorithm>
 
 
+Inventory::~Inventory() {
+    for (const auto &product: this->productNameMap) {
+        delete product.second;
+    }
+}
+
 /*
  * Count of all products in inventory.
  */
@@ -45,11 +51,12 @@ MyRange<Product> Inventory::getAllProducts() const {
  * Inserts the product into the inventory.
  * Uses binary search to find the appropriate position in the vector.
  */
-void Inventory::insertProduct(Product product) {
+void Inventory::insertProduct(const Product &product) {
     auto p = (*this)[product.getName()];
     if (p != nullptr) {
         throw std::invalid_argument("Product already exists");
     }
+    auto newProduct = new Product(product);
     auto first = this->products.begin();
     auto last = this->products.end();
     auto len = std::distance(first, last);
@@ -57,19 +64,19 @@ void Inventory::insertProduct(Product product) {
         auto half = len >> 1;
         auto middle = first;
         std::advance(middle, half);
-        if (middle->getPrice() < product.getPrice()) {
+        if (middle->getPrice() < newProduct->getPrice()) {
             first = ++middle;
             len -= half + 1;
         } else {
             len = half;
         }
     }
-    this->products.insert(first, product);
-    this->productNameMap.insert({product.getName(), &product});
+    this->products.insert(first, *newProduct);
+    this->productNameMap.insert({newProduct->getName(), newProduct});
 }
 
 void Inventory::insertProducts(std::initializer_list<Product> productList) {
-    for (const auto& product : productList) {
+    for (const auto &product: productList) {
         this->insertProduct(product);
     }
 }

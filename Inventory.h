@@ -16,7 +16,7 @@ class Inventory {
 public:
     Inventory() = default;
 
-    ~Inventory() = default;
+    ~Inventory();
 
     size_t productCount() const;
 
@@ -30,7 +30,7 @@ public:
 
     MyRange<Product> getAllProducts() const;
 
-    void insertProduct(Product product);
+    void insertProduct(const Product& product);
 
     void insertProducts(std::initializer_list<Product> productList);
 

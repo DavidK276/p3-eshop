@@ -72,10 +72,7 @@ TEST(TestInventory, MultipleProducts) {
     Product p2("iPhone SE", 799.99);
     Product p3("Logitech MX Master", 98.9);
     Product p4("Modre pero", 0.89);
-    i.insertProduct(p1);
-    i.insertProduct(p2);
-    i.insertProduct(p3);
-    i.insertProduct(p4);
+    i.insertProducts({p2, p1, p3, p4});
     ASSERT_EQ(4, i.productCount());
     ASSERT_EQ(4, i.getAllProducts().getCount());
     ASSERT_EQ(0.89, i.getProduct("Modre pero")->getPrice());
@@ -90,11 +87,7 @@ TEST(TestInventory, ProductSorting) {
     Product p3("Logitech MX Master", 98.9);
     Product p4("Modre pero", 0.89);
     Product p5("Cierne pero", 0.89);
-    inv.insertProduct(p1);
-    inv.insertProduct(p2);
-    inv.insertProduct(p3);
-    inv.insertProduct(p4);
-    inv.insertProduct(p5);
+    inv.insertProducts({p5, p4, p3, p2, p1});
     // check if products are sorted by price ascending
     for (size_t i = 0; i < inv.productCount() - 1; i++) {
         ASSERT_TRUE(inv.getProduct(i)->getPrice() <= inv.getProduct(i)->getPrice());
@@ -107,10 +100,7 @@ TEST(TestInventory, ProductPriceRange) {
     Product p2("iPhone SE", 799.99);
     Product p3("Logitech MX Master", 98.9);
     Product p4("Modre pero", 0.89);
-    i.insertProduct(p1);
-    i.insertProduct(p2);
-    i.insertProduct(p3);
-    i.insertProduct(p4);
+    i.insertProducts({p2, p1, p3, p4});
     MyRange<Product> x = i.filterByPriceRange(98.9, 799.99);
     ASSERT_EQ(2, x.getCount());
     ASSERT_EQ("Logitech MX Master", x.getFirst()->getName());
@@ -124,11 +114,7 @@ TEST(TestInventory, ProductPrice) {
     Product p3("Logitech MX Master 2S", 98.9);
     Product p4("Modre pero", 0.89);
     Product p5("Logitech MX Master 3S", 98.9);
-    i.insertProduct(p1);
-    i.insertProduct(p2);
-    i.insertProduct(p3);
-    i.insertProduct(p4);
-    i.insertProduct(p5);
+    i.insertProducts({p5, p4, p3, p2, p1});
     MyRange<Product> products = i.filterByPrice(98.9);
     ASSERT_EQ(2, products.getCount());
     products = i.filterByPrice(98.89);
@@ -142,11 +128,7 @@ TEST(TestInventory, ProductCategory) {
     Product p3("Logitech MX Master", 98.9);
     Product p4("Modre pero", 0.89);
     Product p5("Cierne pero", 0.89);
-    inv.insertProduct(p1);
-    inv.insertProduct(p2);
-    inv.insertProduct(p3);
-    inv.insertProduct(p4);
-    inv.insertProduct(p5);
+    inv.insertProducts({p5, p4, p3, p2, p1});
     auto filteredProducts = inv.filterByCategory("Mobiles");
     for (const auto &product: filteredProducts) {
         ASSERT_EQ("Mobiles", product.getCategory());
