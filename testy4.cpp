@@ -34,12 +34,7 @@ TEST(TestOrder, ReplaceItems) {
     Product p3("Logitech MX Master", "Mice", 98.9, 13);
     Product p4("Modre pero", "Pens", 0.89, 420);
     Product p5("Cierne pero", "Pens", 0.89, 210);
-    inv.insertProduct(p1);
-    inv.insertProduct(p2);
-    inv.insertProduct(p3);
-    inv.insertProduct(p4);
-    inv.insertProduct(p5);
-    inv.insertProduct(p6);
+    inv.insertProducts({p5, p4, p3, p2, p1, p6});
     OrderItem item(inv["iPhone SE"], 12);
     Order order;
     order.addItem(item);
@@ -56,12 +51,7 @@ TEST(TestOrder, ShipOrder) {
     Product p3("Logitech MX Master", "Mice", 98.9, 13);
     Product p4("Modre pero", "Pens", 0.89, 420);
     Product p5("Cierne pero", "Pens", 0.89, 210);
-    inv.insertProduct(p1);
-    inv.insertProduct(p2);
-    inv.insertProduct(p3);
-    inv.insertProduct(p4);
-    inv.insertProduct(p5);
-    inv.insertProduct(p6);
+    inv.insertProducts({p5, p4, p3, p2, p1, p6});
     OrderItem item(inv["iPhone SE"], 9);
     Order order;
     order.addItem(item);

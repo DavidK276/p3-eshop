@@ -15,11 +15,7 @@ TEST(TestOrderitem, CreateItem) {
     Product p3("Logitech MX Master", 98.9);
     Product p4("Modre pero", 0.89);
     Product p5("Cierne pero", 0.89);
-    inv.insertProduct(p1);
-    inv.insertProduct(p2);
-    inv.insertProduct(p3);
-    inv.insertProduct(p4);
-    inv.insertProduct(p5);
+    inv.insertProducts({p5, p4, p3, p2, p1});
     OrderItem item(inv["iPhone 13"], 1);
     ASSERT_EQ(*inv["iPhone 13"], *item.getProduct());
 }
@@ -31,11 +27,7 @@ TEST(TestOrderItem, SetProduct) {
     Product p3("Logitech MX Master", 98.9);
     Product p4("Modre pero", 0.89);
     Product p5("Cierne pero", 0.89);
-    inv.insertProduct(p1);
-    inv.insertProduct(p2);
-    inv.insertProduct(p3);
-    inv.insertProduct(p4);
-    inv.insertProduct(p5);
+    inv.insertProducts({p5, p4, p3, p2, p1});
     OrderItem item(inv["iPhone 13"], 1);
     item.setProduct(inv["iPhone SE"]);
     ASSERT_EQ(*inv["iPhone SE"], *item.getProduct());
@@ -48,11 +40,7 @@ TEST(TestOrderItem, ItemQuantity) {
     Product p3("Logitech MX Master", 98.9);
     Product p4("Modre pero", 0.89);
     Product p5("Cierne pero", 0.89);
-    inv.insertProduct(p1);
-    inv.insertProduct(p2);
-    inv.insertProduct(p3);
-    inv.insertProduct(p4);
-    inv.insertProduct(p5);
+    inv.insertProducts({p5, p4, p3, p2, p1});
     OrderItem item(inv["iPhone 13"], 1);
     ASSERT_EQ(1, item.getQuantity());
 }
