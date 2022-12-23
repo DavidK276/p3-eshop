@@ -8,8 +8,9 @@
 #include "Product.h"
 #include <vector>
 
-template<typename T> class MyRange {
-    typedef typename std::vector<T>::const_iterator RangeIter;
+template<typename T>
+class MyRange {
+    using RangeIter = typename std::vector<T>::const_iterator;
     RangeIter first;
     RangeIter final;
     RangeIter last;

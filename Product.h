@@ -13,7 +13,7 @@
 
 class Product {
 public:
-    typedef boost::multiprecision::number<boost::multiprecision::cpp_dec_float<16>> Price;
+    using Price = boost::multiprecision::number<boost::multiprecision::cpp_dec_float<16>>;
 private:
     std::string name;
     std::string category;
@@ -26,17 +26,17 @@ public:
 
     Product(Product &&product0);
 
-    Product(const std::string &name0, const Price &price0);
+    Product(std::string name0, Price price0);
 
-    Product(const std::string &name0, const std::string &category0, const Price &price0, unsigned int stock0 = 0);
+    Product(std::string name0, std::string category0, Price price0, unsigned int stock0 = 0);
 
     ~Product() = default;
 
-    std::string getName() const { return this->name; }
+    std::string &getName() const { return (std::string &) this->name; }
 
     void setName(std::string &name0) { this->name = name0; }
 
-    std::string getCategory() const { return this->category; }
+    std::string &getCategory() const { return (std::string &) this->category; }
 
     void setCategory(const std::string &category0) { this->category = category0; }
 

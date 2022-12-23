@@ -29,7 +29,7 @@ public:
 
     void setStatus(OrderStatus status0) { this->status = status0; }
 
-    std::string getAddress() const { return this->address; }
+    std::string &getAddress() const { return (std::string &) this->address; }
 
     void setAddress(const std::string &address0) { this->address = address0; }
 

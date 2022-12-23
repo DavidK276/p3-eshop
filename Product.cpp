@@ -4,22 +4,18 @@
 
 #include "Product.h"
 
+#include <utility>
+
 Product::Product(Product &&product0) : name(std::move(product0.name)), category(std::move(product0.category)),
                                        price(std::move(product0.price)), stock(product0.stock) {
     product0.category = NO_CATEGORY;
 }
 
-Product::Product(const std::string &name0, const Price &price0) : category(NO_CATEGORY), stock(0) {
-    this->name = name0;
-    this->price = price0;
-}
+Product::Product(std::string name0, Price price0) : name(std::move(name0)), category(NO_CATEGORY),
+                                                    price(std::move(price0)), stock(0) {}
 
-Product::Product(const std::string &name0, const std::string &category0, const Price &price0, unsigned int stock0)
-        : stock(stock0) {
-    this->name = name0;
-    this->category = category0;
-    this->price = price0;
-}
+Product::Product(std::string name0, std::string category0, Price price0, unsigned int stock0)
+        : name(std::move(name0)), category(std::move(category0)), price(std::move(price0)), stock(stock0) {}
 
 Product &Product::operator=(const Product &product0) = default;
 

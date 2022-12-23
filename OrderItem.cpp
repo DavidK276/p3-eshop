@@ -16,6 +16,6 @@ const Product *OrderItem::getProduct() const {
 /*
  * Returns the name of the contained product.
  */
-std::string OrderItem::getProductName() const {
+std::string &OrderItem::getProductName() const {
     return this->product->getName();
 }
