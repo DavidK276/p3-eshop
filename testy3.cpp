@@ -20,6 +20,11 @@ TEST(TestOrderitem, CreateItem) {
     ASSERT_EQ(*inv["iPhone 13"], *item.getProduct());
 }
 
+TEST(TestOrderItem, NullItem) {
+    OrderItem item(nullptr, 1);
+    ASSERT_EQ("", item.getProductName());
+}
+
 TEST(TestOrderItem, SetProduct) {
     Inventory inv;
     Product p1("iPhone 13", "Mobiles", 1199.99);
