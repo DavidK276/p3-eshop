@@ -7,6 +7,7 @@ Semestrálny projekt z predmetu Programovanie (3) na tému "E-shop".
 Pri tvorbe bol použitý nasledovný software:
 - C++ 17
 - cmake v3.6.2
+- boost v1.78.0
 
 ## Funkcie
 
