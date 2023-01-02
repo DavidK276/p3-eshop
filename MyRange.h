@@ -17,7 +17,7 @@ class MyRange {
 public:
     MyRange() = delete;
 
-    MyRange(MyRange::RangeIter begin, MyRange::RangeIter end) : first(begin), last(end) {
+    [[maybe_unused]] MyRange(MyRange::RangeIter begin, MyRange::RangeIter end) : first(begin), last(end) {
         this->final = std::prev(end);
     }
 

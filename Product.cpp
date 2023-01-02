@@ -6,7 +6,7 @@
 
 #include <utility>
 
-Product::Product(Product &&product0) : name(std::move(product0.name)), category(std::move(product0.category)),
+Product::Product(Product &&product0) noexcept : name(std::move(product0.name)), category(std::move(product0.category)),
                                        price(std::move(product0.price)), stock(product0.stock) {
     product0.category = NO_CATEGORY;
 }

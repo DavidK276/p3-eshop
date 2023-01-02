@@ -20,7 +20,7 @@ public:
 
     const Product *getProduct() const;
 
-    std::string &getProductName() const;
+    const std::string &getProductName() const;
 
     void setProduct(Product *product0) { this->product = product0; };
 };

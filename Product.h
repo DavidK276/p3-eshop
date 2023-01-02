@@ -24,7 +24,7 @@ public:
 
     Product(const Product &product0) = default;
 
-    Product(Product &&product0);
+    Product(Product &&product0) noexcept;
 
     Product(std::string name0, Price price0);
 
@@ -32,11 +32,11 @@ public:
 
     ~Product() = default;
 
-    std::string &getName() const { return (std::string &) this->name; }
+    const std::string &getName() const { return this->name; }
 
-    void setName(std::string &name0) { this->name = name0; }
+    void setName(const std::string &name0) { this->name = name0; }
 
-    std::string &getCategory() const { return (std::string &) this->category; }
+    const std::string &getCategory() const { return this->category; }
 
     void setCategory(const std::string &category0) { this->category = category0; }
 
