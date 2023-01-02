@@ -4,7 +4,11 @@
 
 #include "OrderItem.h"
 
-OrderItem::OrderItem(Product *product0, const unsigned int quantity0) : product(product0), quantity(quantity0) {}
+OrderItem::OrderItem(Product *product0, const unsigned int quantity0) : product(product0), quantity(quantity0) {
+    if (this->product == nullptr) {
+        throw std::invalid_argument("Null pointer exception");
+    }
+}
 
 /*
  * Returns a pointer to the contained product.
@@ -17,8 +21,5 @@ const Product *OrderItem::getProduct() const {
  * Returns the name of the contained product.
  */
 const std::string &OrderItem::getProductName() const {
-    if (this->product == nullptr) {
-        return (std::string &) "";
-    }
     return this->product->getName();
 }

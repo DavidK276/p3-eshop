@@ -21,8 +21,13 @@ TEST(TestOrderitem, CreateItem) {
 }
 
 TEST(TestOrderItem, NullItem) {
-    OrderItem item(nullptr, 1);
-    ASSERT_EQ("", item.getProductName());
+    try {
+        [[maybe_unused]] OrderItem item(nullptr, 1);
+        ASSERT_TRUE(false);
+    }
+    catch (std::invalid_argument &) {
+
+    }
 }
 
 TEST(TestOrderItem, SetProduct) {
