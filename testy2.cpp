@@ -16,6 +16,33 @@ TEST(TestInventory, EmptyInventory) {
     ASSERT_EQ(nullptr, i.getProduct(0));
 }
 
+TEST(TestInventory, EmptyFile) {
+    std::string filePath = "emptyFile";
+    [[maybe_unused]] std::ofstream file(filePath, std::ios::out);
+    Inventory i;
+    try {
+        i.loadFromFile(filePath);
+        ASSERT_TRUE(false);
+    }
+    catch (std::runtime_error &) {
+        ASSERT_EQ(0, i.productCount());
+    }
+}
+
+TEST(TestInventory, InvalidFile) {
+    std::string filePath = "invalidFile";
+    std::ofstream file(filePath, std::ios::out);
+    file << "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore";
+    Inventory i;
+    try {
+        i.loadFromFile(filePath);
+        ASSERT_TRUE(false);
+    }
+    catch (std::runtime_error &) {
+        ASSERT_EQ(0, i.productCount());
+    }
+}
+
 TEST(TestInventory, EmptyInventoryFile) {
     std::string filePath = "emptyInventory.dat";
     Inventory i1;
