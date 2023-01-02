@@ -7,9 +7,7 @@
 #define MAGIC_NUMBER "ZnamaFEshop1"
 
 Inventory::~Inventory() {
-    for (const auto &product: this->productNameMap) {
-        delete product.second;
-    }
+    this->clear();
 }
 
 /*
