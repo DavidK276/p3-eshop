@@ -6,8 +6,12 @@
 #define ESHOP_PRODUCT_H
 
 #include <iostream>
-#include <boost/multiprecision/cpp_dec_float.hpp>
 #include <stdexcept>
+#include <algorithm>
+#include <fstream>
+#include <boost/multiprecision/cpp_dec_float.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 
 #define NO_CATEGORY "Uncategorized"
 
@@ -19,6 +23,14 @@ private:
     std::string category;
     Price price;
     unsigned int stock{};
+
+    friend class boost::serialization::access;
+
+    template<class T>
+    [[maybe_unused]] void serialize(T &ar, unsigned) {
+        ar & name & category & price & stock;
+    }
+
 public:
     Product() = default;
 

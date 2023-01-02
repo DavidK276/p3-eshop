@@ -36,6 +36,17 @@ include_directories(GoogleTest)
 add_executable(${TARGET_NAME} ${SOURCE_FILES} $<TARGET_OBJECTS:gtest> $<TARGET_OBJECTS:tests>)
 target_link_libraries(${TARGET_NAME} ${CMAKE_THREAD_LIBS_INIT})
 
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED OFF)
+set(Boost_USE_STATIC_RUNTIME OFF)
+
+find_package(Boost 1.78.0 COMPONENTS serialization)
+
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    target_link_libraries(${TARGET_NAME} ${Boost_LIBRARIES})
+endif()
+
 # Enable warning messages
 set(FLAGS_WARNINGS -Wall -Wextra -Wshadow -Wconversion -Wpedantic -pedantic)
 set(FLAGS_AUTO_PATTERN -ftrivial-auto-var-init=pattern)

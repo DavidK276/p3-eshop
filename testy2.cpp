@@ -16,6 +16,15 @@ TEST(TestInventory, EmptyInventory) {
     ASSERT_EQ(nullptr, i.getProduct(0));
 }
 
+TEST(TestInventory, EmptyInventoryFile) {
+    std::string filePath = "emptyInventory.dat";
+    Inventory i1;
+    i1.saveToFile(filePath);
+    Inventory i2;
+    i2.loadFromFile(filePath);
+    ASSERT_EQ(0, i2.productCount());
+}
+
 TEST(TestInventory, OneProduct) {
     Inventory i;
     Product p1("iPhone 13", 1199.99);
@@ -27,6 +36,22 @@ TEST(TestInventory, OneProduct) {
     ASSERT_EQ(1199.99, i.getProduct("iPhone 13")->getPrice());
     ASSERT_EQ("Uncategorized", i.getProduct("iPhone 13")->getCategory());
     ASSERT_FALSE(i.getProduct("iPhone 13")->inStock());
+}
+
+TEST(TestInventory, OneProductFile) {
+    std::string filePath = "oneProduct.dat";
+    Inventory i1;
+    Product p1("iPhone 13", "Phones", 1199.99, 71);
+    i1.insertProduct(p1);
+    i1.saveToFile(filePath);
+    Inventory i2;
+    i2.loadFromFile(filePath);
+    ASSERT_EQ(1, i2.productCount());
+    auto product = i2["iPhone 13"];
+    ASSERT_EQ("iPhone 13", product->getName());
+    ASSERT_EQ("Phones", product->getCategory());
+    ASSERT_EQ(1199.99, product->getPrice());
+    ASSERT_EQ(71, product->getStock());
 }
 
 TEST(TestInventory, DuplicateProduct) {
@@ -78,6 +103,26 @@ TEST(TestInventory, MultipleProducts) {
     ASSERT_EQ(0.89, i.getProduct("Modre pero")->getPrice());
     i["Modre pero"]->stockUp(220);
     ASSERT_EQ(220, i["Modre pero"]->getStock());
+}
+
+TEST(TestInventory, MultipleProductsFile) {
+    std::string filePath = "multipleProducts.dat";
+    Inventory i1;
+    Product p1("iPhone 13", "Mobiles", 1199.99, 0);
+    Product p2("iPhone SE", "Mobiles", 799.99, 13);
+    Product p3("Logitech MX Master", "Mice", 98.9, 79);
+    Product p4("Modre pero", 0.87);
+    Product p5("Cierne pero", "Pens", 0.89, 2147483647);
+    i1.insertProducts({p5, p4, p3, p2, p1});
+    i1.saveToFile(filePath);
+    Inventory i2;
+    i2.loadFromFile(filePath);
+    ASSERT_EQ(5, i2.productCount());
+    ASSERT_EQ(p1, *i2["iPhone 13"]);
+    ASSERT_EQ(p2, *i2["iPhone SE"]);
+    ASSERT_EQ(p3, *i2["Logitech MX Master"]);
+    ASSERT_EQ(p4, *i2["Modre pero"]);
+    ASSERT_EQ(p5, *i2["Cierne pero"]);
 }
 
 TEST(TestInventory, ProductSorting) {

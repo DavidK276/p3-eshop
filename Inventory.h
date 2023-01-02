@@ -20,9 +20,11 @@ public:
 
     size_t productCount() const;
 
-    void loadFromFile(std::string &filePath);
+    void loadFromFile(const std::string &filePath);
 
-    void saveToFile(std::string &filePath) const;
+    void saveToFile(const std::string &filePath) const;
+
+    void clear();
 
     Product *getProduct(const std::string &name) const;
 

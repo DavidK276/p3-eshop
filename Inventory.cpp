@@ -3,8 +3,8 @@
 //
 
 #include "Inventory.h"
-#include <algorithm>
 
+#define MAGIC_NUMBER "ZnamaFEshop1"
 
 Inventory::~Inventory() {
     for (const auto &product: this->productNameMap) {
@@ -172,4 +172,51 @@ Product *Inventory::operator[](const std::string &name) const {
         return product->second;
     }
     return nullptr;
+}
+
+void Inventory::loadFromFile(const std::string &filePath) {
+    if (!std::empty(this->products)) {
+        throw std::runtime_error("Inventory is not empty");
+    }
+    std::ifstream file(filePath, std::ios::in | std::ios::binary);
+    if (!file.is_open()) {
+        throw std::runtime_error("Cannot open file for reading");
+    }
+    constexpr auto l = std::char_traits<char>::length(MAGIC_NUMBER);
+    char magicNumber[l + 1];
+    file.read(magicNumber, l + 1);
+    if (!file.good() || std::strcmp(magicNumber, MAGIC_NUMBER) != 0) {
+        throw std::runtime_error("Invalid file format");
+    }
+    int productCount;
+    file >> productCount;
+    boost::archive::binary_iarchive archive(file);
+    for (int i = 0; i < productCount; i++) {
+        Product newProduct;
+        archive >> newProduct;
+        this->insertProduct(newProduct);
+    }
+    file.close();
+}
+
+void Inventory::saveToFile(const std::string &filePath) const {
+    std::ofstream file(filePath, std::ios::out | std::ios::binary);
+    if (!file.is_open()) {
+        throw std::runtime_error("Cannot open file for writing");
+    }
+    file << MAGIC_NUMBER << '\0';
+    file << this->productCount();
+    boost::archive::binary_oarchive archive(file);
+    for (const auto& product: this->getAllProducts()) {
+        archive << product;
+    }
+    file.close();
+}
+
+void Inventory::clear() {
+    for (const auto &product: this->productNameMap) {
+        delete product.second;
+    }
+    this->products.clear();
+    this->productNameMap.clear();
 }
