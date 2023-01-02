@@ -179,3 +179,15 @@ TEST(TestInventory, ProductCategory) {
         ASSERT_EQ("Mobiles", product.getCategory());
     }
 }
+
+TEST(TestInventory, ClearInventory) {
+    Inventory i1;
+    Product p1("iPhone 13", "Mobiles", 1199.99, 0);
+    Product p2("iPhone SE", "Mobiles", 799.99, 13);
+    Product p3("Logitech MX Master", "Mice", 98.9, 79);
+    Product p4("Modre pero", 0.87);
+    Product p5("Cierne pero", "Pens", 0.89, 2147483647);
+    i1.insertProducts({p5, p4, p3, p2, p1});
+    i1.clear();
+    ASSERT_EQ(0, i1.productCount());
+}

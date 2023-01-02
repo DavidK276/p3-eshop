@@ -174,6 +174,9 @@ Product *Inventory::operator[](const std::string &name) const {
     return nullptr;
 }
 
+/*
+ * Loads products from file. Throws exception when inventory is not empty or when there is a problem with the file.
+ */
 void Inventory::loadFromFile(const std::string &filePath) {
     if (!std::empty(this->products)) {
         throw std::runtime_error("Inventory is not empty");
@@ -199,6 +202,9 @@ void Inventory::loadFromFile(const std::string &filePath) {
     file.close();
 }
 
+/*
+ * Saves products to file. Throws exception when the file can't be opened.
+ */
 void Inventory::saveToFile(const std::string &filePath) const {
     std::ofstream file(filePath, std::ios::out | std::ios::binary);
     if (!file.is_open()) {
@@ -213,6 +219,9 @@ void Inventory::saveToFile(const std::string &filePath) const {
     file.close();
 }
 
+/*
+ * Clears all products from inventory.
+ */
 void Inventory::clear() {
     for (const auto &product: this->productNameMap) {
         delete product.second;
