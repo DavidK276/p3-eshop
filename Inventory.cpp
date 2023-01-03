@@ -190,10 +190,10 @@ void Inventory::loadFromFile(const std::string &filePath) {
     if (!file.good() || std::strcmp(magicNumber, MAGIC_NUMBER) != 0) {
         throw std::runtime_error("Invalid file format");
     }
-    int productCount;
+    size_t productCount;
     file >> productCount;
     boost::archive::binary_iarchive archive(file);
-    for (int i = 0; i < productCount; i++) {
+    for (size_t i = 0; i < productCount; i++) {
         Product newProduct;
         archive >> newProduct;
         this->insertProduct(newProduct);
