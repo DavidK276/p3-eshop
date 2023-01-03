@@ -8,10 +8,11 @@
 #include <iostream>
 
 #define COMMENT_MAX_LENGTH 240
+#define NO_RATING (-1)
 
 class Review {
 protected:
-    char rating{};
+    char rating = NO_RATING;
     std::string comment;
 public:
     Review() = default;
