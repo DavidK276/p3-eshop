@@ -164,10 +164,11 @@ std::vector<Product> Inventory::filterByCategory(const std::string &category) co
 /*
  * Get pointer to product by product name. Returns nullptr on failure.
  */
-Product *Inventory::operator[](const std::string &name) const {
-    auto product = this->productNameMap.find(name);
-    if (this->productNameMap.find(name) != this->productNameMap.end()) {
-        return product->second;
+Product *Inventory::operator[](const std::string &name0) const {
+    auto productIter = this->productNameMap.find(name0);
+    if (productIter != this->productNameMap.end()) {
+        auto [name, product] = *productIter;
+        return product;
     }
     return nullptr;
 }
@@ -197,7 +198,6 @@ void Inventory::loadFromFile(const std::string &filePath) {
         archive >> newProduct;
         this->insertProduct(newProduct);
     }
-    file.close();
 }
 
 /*
@@ -211,18 +211,17 @@ void Inventory::saveToFile(const std::string &filePath) const {
     file << MAGIC_NUMBER << '\0';
     file << this->productCount();
     boost::archive::binary_oarchive archive(file);
-    for (const auto& product: this->getAllProducts()) {
+    for (const auto &product: this->getAllProducts()) {
         archive << product;
     }
-    file.close();
 }
 
 /*
  * Clears all products from inventory.
  */
 void Inventory::clear() {
-    for (const auto &product: this->productNameMap) {
-        delete product.second;
+    for (const auto &[name, product]: this->productNameMap) {
+        delete product;
     }
     this->products.clear();
     this->productNameMap.clear();

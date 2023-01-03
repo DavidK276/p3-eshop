@@ -9,6 +9,7 @@
 #include "MyRange.h"
 #include <map>
 #include <memory>
+#include <algorithm>
 
 class Inventory {
     std::vector<Product> products;
@@ -32,7 +33,7 @@ public:
 
     MyRange<Product> getAllProducts() const;
 
-    void insertProduct(const Product& product);
+    void insertProduct(const Product &product);
 
     void insertProducts(std::initializer_list<Product> productList);
 
