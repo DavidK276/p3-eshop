@@ -9,7 +9,8 @@ set(SOURCE_FILES
         Product.cpp
         Inventory.cpp
         OrderItem.cpp
-        Order.cpp)
+        Order.cpp
+        Review.cpp)
 
 set(TEST_FILES
         testy1.cpp
@@ -40,7 +41,7 @@ set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED OFF)
 set(Boost_USE_STATIC_RUNTIME OFF)
 
-find_package(Boost 1.78.0 COMPONENTS serialization)
+find_package(Boost 1.74.0 COMPONENTS serialization)
 
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
