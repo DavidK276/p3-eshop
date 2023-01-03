@@ -23,6 +23,8 @@ Inventár produktov
 - rýchle vyhľadanie produktu podľa názvy za pomoci mapy
 - filtrovanie podľa ceny, cenového rozsahu, kategórie
 - získanie iterátora všektých produktov
+- načítanie zo súboru
+- uloženie do súboru
 
 Položka objednávky
 - produkt, množstvo
@@ -33,16 +35,3 @@ Objednávka
 - nahádzanie položiek do objednávky
 - nahradenie položiek objednávky ktoré nie sú na sklade položkami z rovnakej kategórie a najvyššou cenou
 - odoslanie objednávky nahradí položky, odráta ich z inventára a nastaví stav na "Odoslaná"
-
-## Zostáva naprogramovať
-
-Inventár produktov
-- načítanie zo súboru
-- uloženie do súboru
-
-Recenzia
-- väzba na produkt a objednávku
-- načítanie zo súboru
-- uloženie do súboru
-
-Iné.

@@ -23,7 +23,7 @@ public:
 
     const OrderItem *getItem(size_t index) const;
 
-    void addItem(OrderItem item);
+    void addItem(const OrderItem &item);
 
     OrderStatus getStatus() const { return this->status; }
 
@@ -36,6 +36,8 @@ public:
     void replaceItems(const Inventory &inventory);
 
     void shipOrder(const Inventory &inventory);
+
+    void saveItemsToFile(const std::string &filePath) const;
 };
 
 

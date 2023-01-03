@@ -30,7 +30,7 @@ const OrderItem *Order::getItem(size_t index) const {
 /*
  * Adds the item to the order.
  */
-void Order::addItem(const OrderItem item) {
+void Order::addItem(const OrderItem &item) {
     this->items.push_back(item);
 }
 
@@ -66,4 +66,19 @@ void Order::shipOrder(const Inventory &inventory) {
         product->ship(item.getQuantity());
     }
     this->status = OrderStatus::SHIPPED;
+}
+
+void Order::saveItemsToFile(const std::string &filePath) const {
+    std::ofstream file(filePath, std::ios::out);
+    if (!file.is_open()) {
+        throw std::runtime_error("Cannot open file for writing");
+    }
+    file << "product name,quantity,rating,comment" << '\n';
+    for (const auto &item: this->items) {
+        file << '"' << item.getProduct()->getName() << '"' << ',' << item.getQuantity();
+        if (item.getRating() != NO_RATING) {
+            file << ',' << static_cast<char>(item.getRating() + '0') << ',' << '"' << item.getComment() << '"';
+        }
+        file << '\n';
+    }
 }

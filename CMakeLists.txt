@@ -16,7 +16,8 @@ set(TEST_FILES
         testy1.cpp
         testy2.cpp
         testy3.cpp
-        testy4.cpp)
+        testy4.cpp
+        testy5.cpp)
 
 set(GTEST_SOURCE_FILES
         GoogleTest/gtest-death-test.cc

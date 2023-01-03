@@ -23,3 +23,8 @@ const Product *OrderItem::getProduct() const {
 const std::string &OrderItem::getProductName() const {
     return this->product->getName();
 }
+
+void OrderItem::addReview(char rating0, const std::string &comment0) {
+    Review::rating = rating0;
+    Review::comment = comment0;
+}

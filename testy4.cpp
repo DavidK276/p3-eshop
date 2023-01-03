@@ -60,3 +60,24 @@ TEST(TestOrder, ShipOrder) {
     ASSERT_EQ(22, inv["iPhone 13 Pro"]->getStock());
     ASSERT_EQ(9, order.getItem(0)->getQuantity());
 }
+
+TEST(TestOrder, ExportOrder) {
+    Inventory inv;
+    Product p1("iPhone 13", "Mobiles", 1199.99, 20);
+    Product p6("iPhone 13 Pro", "Mobiles", 1399.99, 31);
+    Product p2("iPhone SE", "Mobiles", 799.99, 0);
+    Product p3("Logitech MX Master", "Mice", 98.9, 13);
+    Product p4("Modre pero", "Pens", 0.89, 420);
+    Product p5("Cierne pero", "Pens", 0.89, 210);
+    inv.insertProducts({p5, p4, p3, p2, p1, p6});
+    Order order;
+    OrderItem item1(inv["iPhone SE"], 9);
+    item1.addReview(8, "Moze byt");
+    order.addItem(item1);
+    OrderItem item2(inv["Logitech MX Master"], 1);
+    item2.addReview(6, "Chyba softver pre Linux");
+    order.addItem(item2);
+    order.setAddress("Bratislava");
+    std::string filePath = "orderExport.txt";
+    order.saveItemsToFile(filePath);
+}

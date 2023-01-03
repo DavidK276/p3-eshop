@@ -7,11 +7,11 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <algorithm>
 #include <fstream>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include "Review.h"
 
 #define NO_CATEGORY "Uncategorized"
 
