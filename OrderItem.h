@@ -9,10 +9,10 @@
 
 
 class OrderItem : public Review {
-    Product *product;
+    const Product *product;
     unsigned int quantity;
 public:
-    OrderItem(Product *product0, unsigned int quantity0);
+    OrderItem(const Product *product0, unsigned int quantity0);
 
     ~OrderItem() override = default;
 

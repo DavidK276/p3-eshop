@@ -4,7 +4,7 @@
 
 #include "OrderItem.h"
 
-OrderItem::OrderItem(Product *product0, const unsigned int quantity0) : product(product0), quantity(quantity0) {
+OrderItem::OrderItem(const Product *product0, const unsigned int quantity0) : product(product0), quantity(quantity0) {
     if (this->product == nullptr) {
         throw std::invalid_argument("Null pointer exception");
     }

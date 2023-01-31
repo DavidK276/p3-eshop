@@ -54,6 +54,8 @@ public:
 
     Price getPrice() const { return this->price; }
 
+    unsigned int getPriceCents() const { return nearbyint(this->price * 100).convert_to<unsigned int>(); }
+
     void setPrice(const Price &price0) { this->price = price0; }
 
     unsigned int getStock() const { return this->stock; }

@@ -13,15 +13,18 @@ enum class OrderStatus {
 };
 
 class Order {
+    Inventory *inventory;
     std::list<OrderItem> items;
     OrderStatus status;
     std::string address;
 public:
-    Order();
+    explicit Order(Inventory *inventory0);
 
     ~Order() = default;
 
     const OrderItem *getItem(size_t index) const;
+
+    size_t getNumberOfItems() const { return this->items.size(); }
 
     void addItem(const OrderItem &item);
 
@@ -33,11 +36,13 @@ public:
 
     void setAddress(const std::string &address0) { this->address = address0; }
 
-    void replaceItems(const Inventory &inventory);
+    void replaceItems();
 
-    void shipOrder(const Inventory &inventory);
+    void shipOrder();
 
     void saveItemsToFile(const std::string &filePath) const;
+
+    bool suggestItems(const Product::Price &price);
 };
 
 
