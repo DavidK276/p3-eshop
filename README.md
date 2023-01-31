@@ -35,3 +35,4 @@ Objednávka
 - nahádzanie položiek do objednávky
 - nahradenie položiek objednávky ktoré nie sú na sklade položkami z rovnakej kategórie a najvyššou cenou
 - odoslanie objednávky nahradí položky, odráta ich z inventára a nastaví stav na "Odoslaná"
+- automatická ponuka produktov podľa zadanej ceny
