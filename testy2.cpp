@@ -33,6 +33,7 @@ TEST(TestInventory, InvalidFile) {
     std::string filePath = "invalidFile";
     std::ofstream file(filePath, std::ios::out);
     file << "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore";
+    file.close();
     Inventory i;
     try {
         i.loadFromFile(filePath);
